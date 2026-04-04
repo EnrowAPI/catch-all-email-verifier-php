@@ -44,6 +44,7 @@ class CatchAllVerifier
      * @param string $apiKey Your Enrow API key.
      * @param array $params {
      *     @type string $email   Email address to verify (required).
+     *     @type string $custom  Custom tracking parameter.
      *     @type string $webhook Webhook URL for async notification.
      * }
      * @return array Verification result containing an id to poll with get().
@@ -52,6 +53,9 @@ class CatchAllVerifier
     {
         $body = ['email' => $params['email']];
 
+        if (!empty($params['custom'])) {
+            $body['custom'] = $params['custom'];
+        }
         if (!empty($params['webhook'])) {
             $body['settings'] = ['webhook' => $params['webhook']];
         }
@@ -76,23 +80,19 @@ class CatchAllVerifier
      *
      * @param string $apiKey Your Enrow API key.
      * @param array $params {
-     *     @type array  $verifications Array of verifications, each with an email key.
-     *     @type string $webhook       Webhook URL for async notification.
+     *     @type array  $emails  Array of email address strings.
+     *     @type string $custom  Custom tracking parameter.
+     *     @type string $webhook Webhook URL for async notification.
      * }
      * @return array Batch result containing batchId, total, status.
      */
     public static function verifyBulk(string $apiKey, array $params): array
     {
-        $verifications = array_map(function (array $verification): array {
-            $item = ['email' => $verification['email']];
-            if (!empty($verification['custom'])) {
-                $item['custom'] = $verification['custom'];
-            }
-            return $item;
-        }, $params['verifications']);
+        $body = ['emails' => $params['emails']];
 
-        $body = ['verifications' => $verifications];
-
+        if (!empty($params['custom'])) {
+            $body['custom'] = $params['custom'];
+        }
         if (!empty($params['webhook'])) {
             $body['settings'] = ['webhook' => $params['webhook']];
         }
