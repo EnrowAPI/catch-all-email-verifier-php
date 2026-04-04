@@ -1,0 +1,37 @@
+{
+    "name": "enrow/catch-all-email-verifier",
+    "description": "Verify emails on catch-all domains with deterministic verification. API wrapper for Enrow.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "catch-all",
+        "catch-all-verifier",
+        "catch-all-email",
+        "email-verifier",
+        "email-verification",
+        "email-validation",
+        "deliverability",
+        "deterministic",
+        "b2b",
+        "enrow"
+    ],
+    "require": {
+        "php": ">=8.1",
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "CatchAllVerifier\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Enrow",
+            "homepage": "https://enrow.io"
+        }
+    ],
+    "homepage": "https://github.com/enrow/catch-all-email-verifier-php",
+    "support": {
+        "docs": "https://docs.enrow.io"
+    }
+}
